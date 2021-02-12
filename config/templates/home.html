@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <article class="">
+    {% for post in objects_list %}
+      <div class="content-section">
+        {{post.text}}
+      </div>
+    {% endfor %}
+  </article>
+{% endblock content %}
