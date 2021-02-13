@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="col-md-6 col-lg-3 col-xs-12">
+  <div class="services-item wow fadeInDown" data-wow-delay="1.2s">
+    <div class="icon">
+      <p> <small>{{post.author}}</small> <small>{{post.date_posted}}</small> </p>
+    </div>
+    <div class="services-content">
+      <h3><a href="#">{{post.title}}</a></h3>
+      <p>{{post.content}}</p>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
