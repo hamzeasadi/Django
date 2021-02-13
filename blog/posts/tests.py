@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse
 from . import models as M
 from django.utils import dates, timezone
+import datetime
 
 # print(timezone.now().date())
 
@@ -46,6 +47,24 @@ class BlogTest(TestCase):
         self.assertEqual(no_resp.status_code, 404)
         self.assertContains(resp, 'C++')
         self.assertTemplateUsed(resp, 'post_detail.html')
+
+    def test_get_absolute_url(self):
+        self.assertEqual(self.post.get_absolute_url(), '/post/1/')
+
+    def test_post_create_view(self):
+        resp = self.client.post(reverse('new-post'), {
+            'title': 'New title',
+            'content': 'new content',
+            'author': self.user.id,
+            'date_posted': datetime.date.today()
+        })
+        self.assertEqual(resp.status_code, 302)
+        self.assertContains(M.Post.objects.last().title, 'New title')
+        self.assertContain(M.Post.objects.last().content, 'new content')
+        # self.assertContains(M.Post.objects.last().)
+
+    # def test_post_update_view(self):
+
 
 
 
